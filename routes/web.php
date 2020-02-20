@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+/**
+ * Contact Route
+ * Allows CRUD access to route model
+ */
+Route::resource('contacts', 'ContactController');
