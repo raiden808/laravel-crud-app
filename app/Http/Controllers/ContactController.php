@@ -23,7 +23,10 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        /**
+         * Returns the create.blade.php layout
+        */
+        return view('contacts.create');
     }
 
     /**
@@ -34,7 +37,30 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /**
+         * Validations
+         */
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required'
+        ]);
+
+        /**
+         * Insert on db
+         */
+        $contact = new Contact([
+            'first_name' => $request->get('first_name'),
+            'last_name'  => $request->get('last_name'),
+            'email' => $request->get('email'),
+            'job_title' => $request->get('job_title'),
+            'city' => $request->get('city'),
+            'country' => $request -> get('country')
+        ]);
+
+        $contact->save();
+
+        return redirect('/contacts')->with('success', 'Contact saved!');
     }
 
     /**
